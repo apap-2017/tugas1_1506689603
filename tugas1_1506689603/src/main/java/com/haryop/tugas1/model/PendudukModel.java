@@ -53,7 +53,30 @@ public class PendudukModel implements Comparable<PendudukModel>{
 	}
 	
 	public String generateNik(List<String> nikIndexList, String nikPart) {
-		if(!nikPart.equalsIgnoreCase(nik.substring(0, 12))) {
+		if(nik != null) {
+			if(!nikPart.equalsIgnoreCase(nik.substring(0, 12))) {
+				String nikIndex = "";
+				if(nikIndexList.size() == 0) {
+					nikIndex = "" + 1;
+				} else {
+					nikIndex = "" + (Integer.parseInt(nikIndexList.get(nikIndexList.size() - 1).substring(12)) + 1);
+				}
+				
+				if(nikIndex.length() == 1) {
+					nikIndex = "000" + nikIndex;
+				} else if(nikIndex.length() == 2) {
+					nikIndex = "00" + nikIndex;
+				} else if(nikIndex.length() == 3) {
+					nikIndex = "0" + nikIndex;
+				}
+				
+				String nik = nikPart + nikIndex;		
+				setNik(nik);
+				return nik;
+			} else {
+				return nik;
+			}
+		} else {
 			String nikIndex = "";
 			if(nikIndexList.size() == 0) {
 				nikIndex = "" + 1;
@@ -72,9 +95,8 @@ public class PendudukModel implements Comparable<PendudukModel>{
 			String nik = nikPart + nikIndex;		
 			setNik(nik);
 			return nik;
-		} else {
-			return nik;
 		}
+		
 		
 	}
 	

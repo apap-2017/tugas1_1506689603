@@ -87,8 +87,7 @@ public class KeluargaController {
 		String nkkLama = keluarga.getNomorKk();
 
 		kodeKecamatan = kodeKecamatan.substring(0, kodeKecamatan.length() - 1);
-		nkkPart = nkkPart + kodeKecamatan;
-		nkkPart = keluarga.generateNkkPart(nkkPart);
+		nkkPart = nkkPart + kodeKecamatan + keluarga.getNomorKk().substring(6,12);
 		List<String> nkkIndexList = keluargaDAO.generateNkkIndex("%" + nkkPart + "%");
 		String nkk = keluarga.generateNkk(nkkPart, nkkIndexList);
 

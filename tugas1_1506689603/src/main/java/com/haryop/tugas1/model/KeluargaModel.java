@@ -42,27 +42,56 @@ public class KeluargaModel {
 	}
 	
 	public String generateNkk(String nkkPart, List<String> nkkIndexList) {
-		String nkkIndex = "";
+		if(nomorKk != null) {
+			if(!nkkPart.equalsIgnoreCase(nomorKk.substring(0, 12))) {
+				String nkkIndex = "";
 
-		if (nkkIndexList.size() == 0) {
-			nkkIndex = "" + 1;
+				if (nkkIndexList.size() == 0) {
+					nkkIndex = "" + 1;
+				} else {
+					nkkIndex = "" + (Integer.parseInt(nkkIndexList.get(nkkIndexList.size() - 1).substring(12)) + 1);
+				}
+
+				if (nkkIndex.length() == 1) {
+					nkkIndex = "000" + nkkIndex;
+				} else if (nkkIndex.length() == 2) {
+					nkkIndex = "00" + nkkIndex;
+				} else if (nkkIndex.length() == 3) {
+					nkkIndex = "0" + nkkIndex;
+				}
+
+				String nkk = nkkPart + nkkIndex;
+
+				setNomorKk(nkk);
+				
+				return nkk;
+			} else {
+				return nomorKk;
+			}
 		} else {
-			nkkIndex = "" + (Integer.parseInt(nkkIndexList.get(nkkIndexList.size() - 1).substring(12)) + 1);
+			String nkkIndex = "";
+
+			if (nkkIndexList.size() == 0) {
+				nkkIndex = "" + 1;
+			} else {
+				nkkIndex = "" + (Integer.parseInt(nkkIndexList.get(nkkIndexList.size() - 1).substring(12)) + 1);
+			}
+
+			if (nkkIndex.length() == 1) {
+				nkkIndex = "000" + nkkIndex;
+			} else if (nkkIndex.length() == 2) {
+				nkkIndex = "00" + nkkIndex;
+			} else if (nkkIndex.length() == 3) {
+				nkkIndex = "0" + nkkIndex;
+			}
+
+			String nkk = nkkPart + nkkIndex;
+
+			setNomorKk(nkk);
+			
+			return nkk;
 		}
-
-		if (nkkIndex.length() == 1) {
-			nkkIndex = "000" + nkkIndex;
-		} else if (nkkIndex.length() == 2) {
-			nkkIndex = "00" + nkkIndex;
-		} else if (nkkIndex.length() == 3) {
-			nkkIndex = "0" + nkkIndex;
-		}
-
-		String nkk = nkkPart + nkkIndex;
-
-		setNomorKk(nkk);
 		
-		return nkk;
 	}
 	
 	public boolean isStillValid() {
