@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<title>Ubah Data Penduduk</title>
+</head>
+<body>
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">SI Kependudukan</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="/penduduk/tambah">Tambah Penduduk</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/keluarga/tambah">Tambah Keluarga</a></li>
+				<li class="nav-item"><a class="nav-link" href="/penduduk/cari">Cari
+						Penduduk</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+	<!-- Container -->
+	<div class="container">
+
+		<hr>
+
+		<h1 class="text-center">Ubah Data Penduduk</h1>
+
+		<hr>
+
+		<!-- Form add penduduk -->
+		<form action="#" th:action="@{'/penduduk/ubah/' + ${penduduk.nik}}"
+			th:object="${penduduk}" method="post">
+			<div class="form-group">
+				<input type="hidden" class="form-control" id="input-id"
+					readonly="true" th:field="*{id}" th:value="${penduduk.id}">
+			</div>
+			<div class="form-group">
+				<label for="input-nik">NIK</label> <input type="text"
+					class="form-control" id="input-nik" readonly="true"
+					th:field="*{nik}" th:value="${penduduk.nik}"
+					placeholder="Masukkan NIK">
+			</div>
+			<div class="form-group">
+				<label for="input-nama">Nama</label> <input type="text"
+					class="form-control" id="input-nama" th:field="*{nama}"
+					th:value="${penduduk.nama}" placeholder="Masukkan nama">
+			</div>
+			<div class="form-group">
+				<label for="input-tempat-lahir">Tempat Lahir</label> <input
+					type="text" class="form-control" id="input-tempat-lahir"
+					th:field="*{tempatLahir}" th:value="${penduduk.tempatLahir}"
+					placeholder="Masukkan tempat lahir">
+			</div>
+			<div class="form-group">
+				<label for="input-tanggal-lahir">Tanggal Lahir</label> <input
+					type="date" class="form-control" id="input-tanggal-lahir"
+					th:field="*{tanggalLahir}" th:value="${penduduk.tanggalLahir}">
+			</div>
+			<div class="form-group">
+				<label for="input-jenis-kelamin">Jenis Kelamin</label> <select
+					class="form-control" id="input-jenis-kelamin"
+					th:field="*{jenisKelamin}" th:value="${penduduk.jenisKelamin}">
+					<option value="2">-- Pilih Jenis Kelamin --</option>
+					<option value="0">Pria</option>
+					<option value="1">Wanita</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="input-kewarganegaraan">Kewarganegaraan</label> <select
+					class="form-control" id="input-kewarganegaraan" th:field="*{isWni}"
+					th:value="${penduduk.isWni}">
+					<option value="2">-- Pilih Kewarganegaraan --</option>
+					<option value="1">Warga Negara Indonesia (WNI)</option>
+					<option value="0">Warga Negara Asing (WNA)</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="input-keluarga">Nomor Keluarga</label> <input
+					type="number" class="form-control" id="input-keluarga"
+					th:field="*{idKeluarga}" th:value="${penduduk.idKeluarga}"
+					placeholder="Masukkan nomor keluarga">
+			</div>
+			<div class="form-group">
+				<label for="input-agama">Agama</label> <input type="text"
+					class="form-control" id="input-agama" th:field="*{agama}"
+					th:value="${penduduk.agama}" placeholder="Masukkan agama">
+			</div>
+			<div class="form-group">
+				<label for="input-pekerjaan">Pekerjaan</label> <input type="text"
+					class="form-control" id="input-pekerjaan" th:field="*{pekerjaan}"
+					th:value="${penduduk.pekerjaan}" placeholder="Masukkan pekerjaan">
+			</div>
+			<div class="form-group">
+				<label for="input-status-perkawinan">Status Perkawinan</label>
+				<!-- <input type="text" class="form-control" id="input-perkawinan" name="status-perkawinan" field="*{statusPerkawinan}" placeholder="Masukkan Perkawinan"> -->
+				<select class="form-control" id="input-status-perkawinan"
+					th:field="*{statusPerkawinan}"
+					th:value="${penduduk.statusPerkawinan}">
+					<option value="-">-- Pilih Status Perkawinan --</option>
+					<option value="Kawin">Kawin</option>
+					<option value="Belum Kawin">Belum Kawin</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="input-status-dalam-keluarga">Status Dalam
+					Keluarga</label> <select class="form-control"
+					id="input-status-dalam-keluaraga" th:field="*{statusDalamKeluarga}"
+					th:value="${penduduk.statusDalamKeluarga}">
+					<option value="O-">-- Pilih Status Dalam Keluarga --</option>
+					<option value="Kepala Keluarga">Kepala Keluarga</option>
+					<option value="Ibu">Ibu</option>
+					<option value="Anak">Anak</option>
+					<option value="Pembantu">Pembantu</option>
+					<option value="Lain-lain">Lain-lain</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="input-golongan-darah">Golongan Darah</label> <select
+					class="form-control" id="input-golongan-darah"
+					th:field="*{golonganDarah}" th:value="${penduduk.golonganDarah}">
+					<option value="O-">-- Pilih Golongan Darah --</option>
+					<option value="O+">O+</option>
+					<option value="A-">A-</option>
+					<option value="A+">A+</option>
+					<option value="B-">B-</option>
+					<option value="B+">B+</option>
+					<option value="AB-">AB-</option>
+					<option value="AB+">AB+</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+
+		<hr>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+	<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

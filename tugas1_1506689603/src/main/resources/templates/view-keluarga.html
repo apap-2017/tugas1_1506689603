@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<title>Lihat Keluarga</title>
+</head>
+<body>
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">SI Kependudukan</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="/penduduk/tambah">Tambah Penduduk</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/keluarga/tambah">Tambah Keluarga</a></li>
+				<li class="nav-item"><a class="nav-link" href="/penduduk/cari">Cari
+						Penduduk</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+	<!-- Container -->
+	<div class="container">
+		<hr>
+
+		<h3 th:text="'Lihat Data Keluarga - ' + ${keluarga.nomorKk}"></h3>
+
+		<!-- Deskripsi keluarga -->
+		<div class="row">
+			<div class="col font-weight-bold">NKK</div>
+			<div class="col" th:text="${keluarga.nomorKk}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Alamat</div>
+			<div class="col" th:text="${keluarga.alamat}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">RT/RW</div>
+			<div class="col" th:text="${keluarga.rt} + '/' + ${keluarga.rw}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Kelurahan/Desa</div>
+			<div class="col" th:text="${keluarga.kelurahan}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Kecamatan</div>
+			<div class="col" th:text="${keluarga.kecamatan}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Kota</div>
+			<div class="col" th:text="${keluarga.kota}">col</div>
+		</div>
+
+		<!-- Tabel anggota keluarga -->
+		<table class="table">
+			<thead class="thead-inverse">
+				<tr>
+					<th>No</th>
+					<th>Nama Lengkap</th>
+					<th>NIK</th>
+					<th>Jenis Kelamin</th>
+					<th>Tempat Lahir</th>
+					<th>Tanggal Lahir</th>
+					<th>Agama</th>
+					<th>Pekerjaan</th>
+					<th>Status Perkawinan</th>
+					<th>Status Dalam Keluarga</th>
+					<th>Kewarganegaraan</th>
+				</tr>
+			</thead>
+			<tbody
+				th:each="penduduk, iterationStatus : ${keluarga.anggotaKeluarga}">
+				<tr>
+					<th scope="row" th:text="${iterationStatus.index + 1}">1</th>
+					<td th:text="${penduduk.nama}">Mark</td>
+					<td th:text="${penduduk.nik}">Mark</td>
+					<div th:switch="${penduduk.jenisKelamin}">
+						<td th:case="'0'">Pria</td>
+						<td th:case="'1'">Wanita</td>
+					</div>
+					<td th:text="${penduduk.tempatLahir}">Mark</td>
+					<td th:text="${penduduk.tanggalLahir}">Mark</td>
+					<td th:text="${penduduk.agama}">Mark</td>
+					<td th:text="${penduduk.pekerjaan}">Mark</td>
+					<td th:text="${penduduk.statusPerkawinan}">Mark</td>
+					<td th:text="${penduduk.statusDalamKeluarga}">Mark</td>
+					<div th:switch="${penduduk.isWni}">
+						<td th:case="'1'">WNI</td>
+						<td th:case="'0'">WNA</td>
+					</div>
+				</tr>
+			</tbody>
+		</table>
+
+		<hr>
+
+		<div class="row">
+			<a th:href="@{'/keluarga/ubah/' + ${keluarga.nomorKk}}"
+				class="btn btn-info" role="button">Ubah Data</a>
+		</div>
+
+		<hr>
+
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+	<script src="../js/bootstrap.min.js"></script>
+
+</body>
+</html>

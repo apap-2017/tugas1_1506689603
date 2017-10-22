@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<title>Lihat Penduduk</title>
+</head>
+<body>
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">SI Kependudukan</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="/penduduk/tambah">Tambah Penduduk</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/keluarga/tambah">Tambah Keluarga</a></li>
+				<li class="nav-item"><a class="nav-link" href="/penduduk/cari">Cari
+						Penduduk</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+	<!-- Container -->
+	<div class="container">
+
+		<hr>
+
+		<div th:switch="${redirect}">
+			<div th:case="'true'">
+				<h2>Sukses !!</h2>
+				<p
+					th:text="'Penduduk dengan NIK ' + ${penduduk.nik} +' sudah tidak aktif'"></p>
+			</div>
+		</div>
+
+		<hr>
+
+		<h3 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}"></h3>
+		<div class="row">
+			<div class="col font-weight-bold">NIK</div>
+			<div class="col" th:text="${penduduk.nik}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Nama</div>
+			<div class="col" th:text="${penduduk.nama}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Tempat/Tanggal Lahir</div>
+			<div class="col"
+				th:text="${penduduk.tempatLahir} + ', ' + ${penduduk.tanggalLahir}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Alamat</div>
+			<div class="col" th:text="${keluarga.alamat}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">RT/RW</div>
+			<div class="col" th:text="${keluarga.rt} + ' / ' + ${keluarga.rw}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Kelurahan/Desa</div>
+			<div class="col" th:text="${keluarga.kelurahan}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Kecamatan</div>
+			<div class="col" th:text="${keluarga.kecamatan}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Kota</div>
+			<div class="col" th:text="${keluarga.kota}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Golongan Darah</div>
+			<div class="col" th:text="${penduduk.golonganDarah}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Agama</div>
+			<div class="col" th:text="${penduduk.agama}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Status Perkawinan</div>
+			<div class="col" th:text="${penduduk.statusPerkawinan}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Pekerjaan</div>
+			<div class="col" th:text="${penduduk.pekerjaan}">col</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Status Kewarganegaraan</div>
+			<div class="col" th:switch="${penduduk.isWni}">
+				<div th:case="'1'">WNI</div>
+				<div th:case="'0'">WNA</div>
+			</div>
+
+			<div class="w-100"></div>
+
+			<div class="col font-weight-bold">Status Kematian</div>
+			<div class="col" th:switch="${penduduk.isWafat}">
+				<div th:case="'1'">Wafat</div>
+				<div th:case="'0'">Hidup</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row" th:switch="${button}">
+			<div th:case="'button'">
+				<form action="#" th:action="@{/penduduk/mati}"
+					th:object="${penduduk}" method="post">
+					<input type="hidden" class="form-control" th:field="*{nik}"
+						th:value="${penduduk.nik}">
+					<button type="submit" class="btn btn-primary">Ubah Status Kematian</button>
+				</form>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<a th:href="@{'/penduduk/ubah/' + ${penduduk.nik}}"
+				class="btn btn-info" role="button">Ubah Data</a>
+		</div>
+
+		<hr>
+
+	</div>
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+	<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
