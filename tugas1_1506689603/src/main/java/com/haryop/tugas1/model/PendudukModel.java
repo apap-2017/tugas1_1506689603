@@ -53,24 +53,29 @@ public class PendudukModel implements Comparable<PendudukModel>{
 	}
 	
 	public String generateNik(List<String> nikIndexList, String nikPart) {
-		String nikIndex = "";
-		if(nikIndexList.size() == 0) {
-			nikIndex = "" + 1;
+		if(!nikPart.equalsIgnoreCase(nik.substring(0, 12))) {
+			String nikIndex = "";
+			if(nikIndexList.size() == 0) {
+				nikIndex = "" + 1;
+			} else {
+				nikIndex = "" + (Integer.parseInt(nikIndexList.get(nikIndexList.size() - 1).substring(12)) + 1);
+			}
+			
+			if(nikIndex.length() == 1) {
+				nikIndex = "000" + nikIndex;
+			} else if(nikIndex.length() == 2) {
+				nikIndex = "00" + nikIndex;
+			} else if(nikIndex.length() == 3) {
+				nikIndex = "0" + nikIndex;
+			}
+			
+			String nik = nikPart + nikIndex;		
+			setNik(nik);
+			return nik;
 		} else {
-			nikIndex = "" + (Integer.parseInt(nikIndexList.get(nikIndexList.size() - 1).substring(12)) + 1);
+			return nik;
 		}
 		
-		if(nikIndex.length() == 1) {
-			nikIndex = "000" + nikIndex;
-		} else if(nikIndex.length() == 2) {
-			nikIndex = "00" + nikIndex;
-		} else if(nikIndex.length() == 3) {
-			nikIndex = "0" + nikIndex;
-		}
-		
-		String nik = nikPart + nikIndex;		
-		setNik(nik);
-		return nik;
 	}
 	
 	public void formatTanggalLahir() throws ParseException {
